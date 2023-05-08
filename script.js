@@ -1,22 +1,30 @@
 const container = document.querySelector('#container');
-const userInput = prompt('Dimensions of your grid:');
+const defaultValue = 16;
+const resizeButton = document.querySelector('#resize-button');
+
+resizeButton.addEventListener('click', () => {
+    let userInput = prompt("What would you like your dimensions to be?");
+    if (userInput > 64) 
+        userInput = prompt("Too large. Enter a number 64 or less");
+
+    container.innerHTML = "";
+    createDivs(userInput);
+
+})
+
 
 
 function createDivs(input) {
-    const height = 20 * input;
-    const width = 20 * input;
-    container.style.width = width + 'px';
-    container.style.height = height + 'px';
     for (let i = 0; i < input; i++) {
         const colDiv = document.createElement('div');
         container.appendChild(colDiv);
        
         for (let j = 0; j < input; j++) {
             const rowDiv = document.createElement('div');
-            rowDiv.className = "tinier-div";
+            rowDiv.className = "row";
             rowDiv.style.backgroundColor = 'red';
-            rowDiv.style.width = '18px'
-            rowDiv.style.height = '18px'
+            rowDiv.style.width = 320 / input - 2 + 'px';
+            rowDiv.style.height = 320 / input - 2 + 'px';
             rowDiv.style.border = '1px solid black';
             colDiv.appendChild(rowDiv);
         }
@@ -26,4 +34,4 @@ function createDivs(input) {
 }
 
 
-createDivs(userInput);
+createDivs(defaultValue);

@@ -9,8 +9,12 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <button id="resize-button">Resize</button>
    <div id="container">
        
+  </div>
+  <div class="slidecontainer">
+    <input type="range" min="1" max="64" value="16" class="slider" onchange="updateTextInput(this.value);">
   </div>
 </body>
 </html>
