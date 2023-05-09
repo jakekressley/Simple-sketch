@@ -1,18 +1,5 @@
 const container = document.querySelector('#container');
 const defaultValue = 16;
-const resizeButton = document.querySelector('#resize-button');
-
-resizeButton.addEventListener('click', () => {
-    let userInput = prompt("What would you like your dimensions to be?");
-    if (userInput > 64) 
-        userInput = prompt("Too large. Enter a number 64 or less");
-
-    container.innerHTML = "";
-    createDivs(userInput);
-
-})
-
-
 
 function createDivs(input) {
     for (let i = 0; i < input; i++) {
@@ -29,8 +16,17 @@ function createDivs(input) {
             colDiv.appendChild(rowDiv);
         }
     }
+}
 
+function updateDivs(val) {
+    document.querySelector('#slider-value').value = val;
+    container.innerHTML = "";
+    createDivs(val);
+}
 
+function updateSlider(val) {
+    document.querySelector('#slider').value = val
+    updateDivs(val)
 }
 
 

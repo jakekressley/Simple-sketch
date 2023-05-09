@@ -5,6 +5,10 @@
     height: 320px;
 }
 
+#slider {
+    display: block;
+}
+
 .slider {
     color: pink;
 }
