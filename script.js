@@ -61,10 +61,20 @@ function newEventListeners() {
     divs.forEach((div) => {
         div.addEventListener('dragover', (e) => {
             e.preventDefault()
-            changeColor(div)
+            changeColor(div, currentColor)
         });
     })   
 }
+
+
+const clearButton = document.querySelector('#clear-button')
+let clearClicked = false;
+clearButton.addEventListener('click', () => {
+    gridContainer.innerHTML = ""
+    createDivs(document.querySelector('#slider-value').value)
+    newEventListeners()
+})
+
 
 
 function updateGridSize(val) {
@@ -81,21 +91,4 @@ function updateSlider(val) {
 
 function changeColor(div, color) {
     div.style.backgroundColor = color;
-}
-
-let colorSelected = false
-
-function getCurrentColor(div) {
-    if (!colorSelected) return 'black'
-
-    const colorDivs = document.querySelectorAll('.color-div')
-    console.log(color-divs)
-    colorDivs.forEach((colorDiv) => {
-        div.addEventListener('click', () => {
-            console.log("different color pressed")
-            colorSelected = true
-            const color = colorDiv.style.backgroundColor
-            return color;
-        });
-    })
 }
