@@ -1,5 +1,11 @@
+body {
+    background-color: #323437;
+}
+
 #container {
     display: flex;
+    background-color: #323437;
+    padding: 100px;
 }
 
 #color-section {
@@ -10,14 +16,23 @@
 #grid-container {
     outline: 4px solid black;
     display: flex;
-    width: 320px;
-    height: 320px;
+    width: 480px;
+    height: 480px;
+    background-color: white;
 }
 
 #slider {
     display: block;
 }
 
+#eraser-button {
+    display: block;
+}
+
+#eraser {
+    width: 20px;
+    height: auto;
+}
 
 .slider {
     color: pink;
@@ -25,8 +40,14 @@
 
 .color-div {
     outline: 2px solid black;
-    width: 16px;
-    height: 16px;
-    margin-bottom: 10px;
+    width: 32px;
+    height: 32px;
+    margin: 10px;
     cursor: pointer;
+}
+
+.selected-color {
+    outline: 1px solid white;
+    transform: scale(1.1);
+    transition: ease-in-out 0.05s;
 }

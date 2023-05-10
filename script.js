@@ -21,6 +21,12 @@ function createDivs(input) {
     }
 }
 
+const eraser = document.querySelector('#eraser')
+eraser.addEventListener('click', () => {
+    currentColor = 'white'
+    eraser.style.outline = 'solid white 2px;'
+})
+
 let colorArray = [
     ['#FF0000', '#00FFFF', '#FF00FF'],
     ['#FF8000', '#0080FF', '#964B00'],
@@ -38,8 +44,16 @@ for (let i = 0; i < 4; i++) {
         const rowDiv = document.createElement('div')
         rowDiv.classList.add('color-div')
         rowDiv.style.backgroundColor = colorArray[i][j];
+        if (i == 3 && j ==2) rowDiv.classList.add('selected-color')
         rowDiv.addEventListener('click', () => {
+            if (document.querySelectorAll('.selected-color').length == 1) {
+                document.querySelectorAll('.selected-color').forEach((e) => {
+                    e.classList.remove('selected-color')
+                });
+            }
+            eraser.style.background = 'white';
             currentColor = rowDiv.style.backgroundColor
+            rowDiv.classList.toggle('selected-color')
         })
         colDiv.append(rowDiv);
     }
@@ -66,9 +80,7 @@ function newEventListeners() {
     })   
 }
 
-
 const clearButton = document.querySelector('#clear-button')
-let clearClicked = false;
 clearButton.addEventListener('click', () => {
     gridContainer.innerHTML = ""
     createDivs(document.querySelector('#slider-value').value)
