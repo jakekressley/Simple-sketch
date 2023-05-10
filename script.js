@@ -24,7 +24,7 @@ function createDivs(input) {
 let colorArray = [
     ['#FF0000', '#00FFFF', '#FF00FF'],
     ['#FF8000', '#0080FF', '#964B00'],
-    ['#FFFF00', '#0000FF', '#FFFFFF'],
+    ['#FFFF00', '#0000FF', '#f1c27d'],
     ['#00FF00', '#8000FF', '#000000']
 ]
 
@@ -39,7 +39,7 @@ for (let i = 0; i < 4; i++) {
         rowDiv.classList.add('color-div')
         rowDiv.style.backgroundColor = colorArray[i][j];
         rowDiv.addEventListener('click', () => {
-            console.log('balls')
+            currentColor = rowDiv.style.backgroundColor
         })
         colDiv.append(rowDiv);
     }
