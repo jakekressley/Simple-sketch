@@ -16,12 +16,14 @@ function createDivs(input) {
             rowDiv.style.height = gridContainerHeight / input - 2 + 'px';
             rowDiv.style.border = '1px solid black';
             rowDiv.draggable = 'true';
+            rowDiv.ondragstart="startDrag(event)"
+            rowDiv.ondragend="endDrag(event)"
             colDiv.appendChild(rowDiv);
         }
     }
 }
 
-const eraser = document.querySelector('#eraser')
+const eraser = document.querySelector('#eraser-button')
 eraser.addEventListener('click', () => {
     currentColor = 'white'
     eraser.style.outline = 'solid white 2px;'
@@ -44,14 +46,17 @@ for (let i = 0; i < 4; i++) {
         const rowDiv = document.createElement('div')
         rowDiv.classList.add('color-div')
         rowDiv.style.backgroundColor = colorArray[i][j];
-        if (i == 3 && j ==2) rowDiv.classList.add('selected-color')
+        if (i == 3 && j ==2) 
+        {
+            rowDiv.classList.add('selected-color')
+        }
+            
         rowDiv.addEventListener('click', () => {
             if (document.querySelectorAll('.selected-color').length == 1) {
                 document.querySelectorAll('.selected-color').forEach((e) => {
                     e.classList.remove('selected-color')
                 });
             }
-            eraser.style.background = 'white';
             currentColor = rowDiv.style.backgroundColor
             rowDiv.classList.toggle('selected-color')
         })
@@ -63,6 +68,12 @@ createDivs(defaultValue);
 newEventListeners();
 
 const divs = document.querySelectorAll('.row')
+divs.forEach((div) => {
+    div.addEventListener('click', (e) => {
+        e.preventDefault()
+        changeColor(div, currentColor)
+    });
+})
     divs.forEach((div) => {
         div.addEventListener('dragover', (e) => {
             e.preventDefault()
@@ -79,6 +90,19 @@ function newEventListeners() {
         });
     })   
 }
+
+
+function startDrag(e) {
+    let element = e.target;
+  
+    element.classList.add('hide');
+}
+
+function endDrag(e) {
+    let element = e.srcElement;
+    
+    element.classList.remove('hide');
+  }
 
 const clearButton = document.querySelector('#clear-button')
 clearButton.addEventListener('click', () => {
